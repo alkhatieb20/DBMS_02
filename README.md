@@ -560,14 +560,14 @@ git commit -m "ci: render PlantUML schema and publish GitHub Release on tag"
 if you replaced it with `on: push: branches: ['main']`? Would the release
 workflow still make sense? Why or why not?
 
-> *Your answer:*
+> *Your answer:* If changed to branches: ['main'], the workflow would create a new GitHub Release on every single commit pushed to the main branch. This breaks the concept of semantic versioning and curated releases, leading to a flooded and chaotic releases page.
 
 **Question 5.2:** The step `apt-get install plantuml` takes roughly 20–30 seconds
 on every run. In a larger team with many releases per day, this adds up. Name
 one GitHub Actions mechanism that could eliminate this installation time on
 repeated runs.
 
-> *Your answer:*
+> *Your answer:* To eliminate installation time, you could use a mechanism like "Caching" (e.g., the actions/cache step) to store the downloaded packages, or you could run the job inside a pre-built Docker container image that already has PlantUML installed
 
 ---
 
