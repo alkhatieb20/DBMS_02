@@ -593,7 +593,8 @@ Open your fork on GitHub and navigate to the **Actions** tab.
 > **Screenshot 4:** Take a screenshot of the completed GitHub Actions run
 > showing all four steps with green checkmarks, and insert it here.
 >
-> `[insert screenshot]`
+> `[insert screenshot]`<img width="665" height="250" alt="Screenshot_4" src="https://github.com/user-attachments/assets/190fe308-c03b-4cfc-966c-c1ae2b872400" />
+
 
 Once the workflow has completed, navigate to **Releases** in the right sidebar.
 
