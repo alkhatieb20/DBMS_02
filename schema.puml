@@ -15,6 +15,10 @@ skinparam entityFontStyle       bold
 ' ------------------------------------------------------------
 ' Entities
 ' ------------------------------------------------------------
+entity Genre {
+  * GenreID : string
+  Name : string
+}
 
 entity "Book" as B {
   * ISBN              : CHAR(13)    <<PK>>
@@ -69,6 +73,8 @@ M ||--o{ L : "places"
 
 ' 4. Copy    -- is borrowed in --  Loan    (1:0..N)
 C ||--o{ L : "is borrowed in"
+
+Book }|--|{ Genre : "belongs to"
 
 @enduml
 ' Bonus task: verified Condition attribute
