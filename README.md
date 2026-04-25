@@ -65,7 +65,8 @@ git --version
 > **Screenshot 1:** Take a screenshot of your terminal showing all three
 > successful version checks and insert it here.
 >
-> `[insert screenshot]`
+> `[insert screenshot]`<img width="406" height="146" alt="Screenshot_1" src="https://github.com/user-attachments/assets/a8da4c19-4ccb-4c68-adf8-080ea65c956b" />
+
 
 ---
 
@@ -216,20 +217,20 @@ git commit -m "feat: complete ER schema for library management"
 ellipses). PlantUML uses Crow's Foot notation. Describe one concrete difference
 in how an N:M relationship is represented in each notation.
 
-> *Your answer:*
+> *Your answer:* Chen notation uses distinct shapes like diamonds for relationships and connects entities with simple lines. Crow's Foot notation, on the other hand, places the relationship label directly on the line and uses specific symbols at the ends of the line (like a crow's foot) to visually represent the cardinality (e.g., 1:N, N:M) without requiring additional shapes.
 
 **Question 2.2:** What would happen if you wrote `@startuml Library` instead of
 `@startuml` at the top of `schema.puml`? Try it locally (`plantuml -tsvg schema.puml`)
 and observe the output filename. Why would this break the workflow?
 
-> *Your answer:*
+> *Your answer:* Writing @startuml Library tells PlantUML to explicitly name the output file Library.svg instead of the default schema.svg. This would break the GitHub Actions workflow because the CI pipeline is explicitly configured to look for, and upload, a file exactly named schema.svg.
 
 **Question 2.3:** The `Author`–`Book` relationship is N:M. Does your PlantUML
 diagram require you to model the intermediate join table explicitly, or does
 PlantUML abstract it away? At which stage of the design process would the join
 table appear?
 
-> *Your answer:*
+> *Your answer:* PlantUML abstracts the intermediate join table away at the conceptual level; you simply draw an N:M line (}|--|{) directly between Author and Book. The explicit intermediate join table would only appear later during the logical or physical database design stage.
 
 ---
 
@@ -296,7 +297,8 @@ Open `schema.svg` in a browser or SVG viewer.
 > **Screenshot 2:** Take a screenshot of `schema.svg` open in your browser,
 > showing all five entities and all four relationships, and insert it here.
 >
-> `[insert screenshot]`
+> `[insert screenshot]`<img width="232" height="343" alt="Screenshot_2" src="https://github.com/user-attachments/assets/748bf5f2-8fee-45cc-a451-c78b9a15e445" />
+
 
 Once the diagram looks correct, tell Git to ignore the generated artifact.
 The workflow will recreate it on every release:
@@ -324,13 +326,13 @@ git commit -m "chore: ignore generated SVG artifact"
 Name one shell command you could use to check the exit code of the last command
 and verify that the render succeeded, without opening the SVG file.
 
-> *Your answer:*
+> *Your answer:* You can use the echo $? command immediately after running PlantUML. If it outputs 0, the previous command succeeded without errors.
 
 **Question 3.2:** Delete `schema.svg` and run `plantuml -tsvg schema.puml` again.
 Then run `git status`. Is `schema.svg` shown as an untracked file? Explain why
 or why not.
 
-> *Your answer:*
+> *Your answer:* No, it will not be shown as untracked. Because schema.svg is now explicitly listed in the .gitignore file, Git completely ignores its existence in the directory and will not prompt you to track it.
 
 ---
 
@@ -398,7 +400,8 @@ git tag
 > **Screenshot 3:** Take a screenshot of `git log --oneline -5` showing your
 > commits in order, and insert it here.
 >
-> `[insert screenshot]`
+> `[insert screenshot]`<img width="934" height="100" alt="Screenshot_3" src="https://github.com/user-attachments/assets/4bb6e57d-f886-4ba5-a039-b81457a1225e" />
+
 
 > **Caveat:** Tags are not pushed automatically with `git push origin main`.
 > You must push them explicitly. Forgetting this step means the workflow never
@@ -409,12 +412,12 @@ git tag
 **Question 4.1:** Run `git push origin main`. Then open the **Actions** tab in
 your fork on GitHub. Did any workflow run trigger? Explain why or why not.
 
-> *Your answer:*
+> *Your answer:* No workflow will trigger. The YAML file specifically states on: push: tags: ['v*']. A normal branch push to main does not meet this condition, so GitHub Actions ignores it.
 
 **Question 4.2:** Run `git tag -v v1.0.0`. What information is shown that
 `git tag` alone does not display? What does the `-v` flag verify?
 
-> *Your answer:*
+> *Your answer:* The git tag -v command verifies the GPG signature of the tag. Even without a signature, an annotated tag contains metadata such as the tagger's name, email, date, and a specific tag message, whereas a simple lightweight tag only points to the commit hash.
 
 ---
 
